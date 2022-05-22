@@ -1,0 +1,59 @@
+<% layout('layouts/siteBoilerplate') %>
+
+
+
+<div class="d-flex align-items-center">
+    <div class="container col-lg-6 p-4">
+    <h1 class="mb-2 text-left fs-2">Create an account for free</h1>
+    <h6 class="mb-5 text-left">Free forever.</h6>
+        <div>
+            <form action="/register" method="POST" class="validated-form" novalidate>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="text" id="username" name="username" required>
+                    <label class="form-label" for="username">site.com/</label>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please enter a valid landing page name.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="email" id="email" name="email" required>
+                    <label class="form-label" for="email">Email</label>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please enter a valid email.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="password" id="password" name="password" required>
+                    <label class="form-label" for="password">Password</label>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please enter a valid password.
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" name="TandC" id="TandC" required>
+                    <label class="form-check-label" for="TandC">
+                        By creating an account you are agreeing to our <a href="" class="">Terms and Conditions</a>.
+                    </label>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please accept our Terms and Conditions.
+                    </div>
+                  </div>
+                <div class="row mb-3 mt-5">
+                    <button class="btn btn-light" type="submit">Sign up with email</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
