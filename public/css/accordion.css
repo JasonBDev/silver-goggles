@@ -1,0 +1,74 @@
+.logo {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: black;
+}
+
+.displayed-img {
+    border-radius: 5px;
+}
+
+/* #new-tab-form input:focus {
+    box-shadow: none;
+}
+
+#new-tab-form textarea:focus {
+    box-shadow: none;
+} */
+
+#new-tab-form .label-img {
+    background-image:
+        repeating-linear-gradient(0deg, #6c757d, #6c757d 30px, transparent 30px, transparent 36px),
+        repeating-linear-gradient(90deg, #6c757d, #6c757d 30px, transparent 30px, transparent 36px),
+        repeating-linear-gradient(180deg, #6c757d, #6c757d 30px, transparent 30px, transparent 36px),
+        repeating-linear-gradient(270deg, #6c757d, #6c757d 30px, transparent 30px, transparent 36px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: 0 0, 0 0, 100% 0, 0 100%;
+    background-size: 1.5px 100%, 100% 1.5px, 1.5px 100%, 100% 1.5px;
+    background-repeat: no-repeat;
+}
+
+#new-tab-form .label-img:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+#new-tab-form .label-img span {
+    text-align: center;
+    font-size: small;
+    font-style: italic;
+}
+
+#new-tab-form .input-img {
+    display: none;
+}
+
+.delete-element-icon {
+    cursor: pointer;
+}
+
+.head-text-size {
+    font-size: 1.25rem;
+}
+
+.sub-text-size {
+    font-size: 1rem;
+}
+
+.accordion-expand-icon {
+    transition: 0.25s ease-in-out;
+}
+
+.accordion-expand-icon.up {
+    transform: rotate(-180deg);
+}
+
+.accordion-expand-icon:focus {
+    box-shadow: none;
+}
