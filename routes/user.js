@@ -205,10 +205,10 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 })
 
-router.get('/TEST', (req, res) => {
-    const pageTitle = 'TEST';
-    res.render('accordions/TESTedit', { pageTitle });
-})
+// router.get('/TEST', (req, res) => {
+//     const pageTitle = 'TEST';
+//     res.render('accordions/TESTedit', { pageTitle });
+// })
 
 
 
