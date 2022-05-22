@@ -1,0 +1,41 @@
+<% layout('layouts/showBoilerplate') %>
+<h1>SHOW PAGE</h1>
+  <% const numAccordions = 1; %> 
+  <% const numSections = 2; %> 
+  <% for (let i = 1; i <= numAccordions; ++i) { %> 
+  <div class="accordion" id="accordionExample">
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading1">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+          WELCOME
+        </button>
+      </h2>
+
+
+
+      <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#accordionExample">
+        
+        <% for (let j = 1; j<= numSections; ++j) { %> 
+        <div class="accordion-body">
+          <a href="#" target="_blank"><img class="img-fluid mb-3 img" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1474" alt="palceholder"></a>
+          <h2>Glad You Are Here</h2>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur nulla expedita nisi optio dolor fugit minus enim ad? Recusandae saepe veniam odit sapiente dolore quaerat eum numquam, quod alias id?
+          Sit neque nihil repellendus adipisci ullam est! Minus, minima! Hic, voluptatum eos laborum aliquam quas praesentium! Error itaque velit, libero, sint laborum eius odit similique laudantium deleniti voluptas ex ullam!
+          Cum, nostrum totam rerum ipsa aliquid nisi autem dolorum. Earum quod excepturi possimus nam. Beatae exercitationem consectetur quas reprehenderit fugit perspiciatis odit laudantium tempore molestias sunt, deserunt iure dignissimos accusamus?
+          Iure voluptates possimus illum dicta vitae, culpa quisquam reprehenderit? Iusto, in magni veritatis sapiente enim sed dolore esse maiores aliquid dolorum voluptatibus mollitia optio possimus eius commodi, asperiores tenetur? Error!</p>
+          <div class="row">
+              <a class="btn btn-outline-dark mb-2" href="#" target="_blank">Learn More</a>
+          </div>
+          <div class="row">
+              <a class="btn btn-outline-dark mb-2" href="#" target="_blank">Join</a>
+          </div>
+        </div>
+        <% } %> 
+
+      </div>
+
+    </div>
+
+  </div>
+  <% } %> 

@@ -1,0 +1,29 @@
+<% layout('layouts/userBoilerplate') %>
+<%- include('../partials/logo') %>
+
+
+<form id="new-tab-form" action="/admin" method="POST">
+  <div class="row">
+    <div class="col-auto me-auto">
+      <button onclick="createTab()" type="button" class="btn btn-link btn-sm" id="add-tab-button">Add Tab</button>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-link btn-sm" id="add-tab-button">Save</button>
+    </div>
+  </div>
+
+
+  <div class="accordion" id="accordionExample">
+  
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+    <%- include('../partials/js/editScripts') %>
