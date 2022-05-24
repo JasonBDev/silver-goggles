@@ -6,7 +6,6 @@ let subheadNum = 0;
 let informationNum = 0;
 let buttonNum = 0;
 
-
 function increment(el) {
     if (el === 'tab') {
         tabNum += 1;

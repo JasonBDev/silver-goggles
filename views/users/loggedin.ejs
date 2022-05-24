@@ -1,7 +1,6 @@
 <% layout('layouts/userBoilerplate') %>
 
-
-<form id="new-tab-form" action="/admin?_method=PUT" method="POST">
+  <form id="new-tab-form" action="/admin?_method=PUT" method="POST">
     <div class="row">
       <div class="col-auto me-auto">
         <button onclick="createTab()" type="button" class="btn btn-link btn-sm" id="add-tab-button">Add Tab</button>
@@ -10,61 +9,116 @@
         <button class="btn btn-link btn-sm" type="submit" id="edit-tab-button">Save</button>
       </div>
     </div>
-  
-  
+
     <div class="accordion" id="accordionExample">
-  
-        <% for(let tab of accordion.tabs) { %>  
+
+      <% for(let tab of accordion.tabs) { %>
         <div class="accordion-item">
+
           <h2 class="accordion-header" id="heading<%= tab._id %>">
             <div class="d-flex align-items-center p-2">
+              <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
+                fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd" />
+              </svg>
               <label class="visually-hidden" for="edit-title<%= tab._id %>"></label>
-              <input class="form-control form-control-lg me-3 border-0" id="edit-title<%= tab._id %>" type="text" name="tabs[<%= tab %>][title]" value="<%= tab.title %>" placeholder="Title 1">
-              <button class="btn accordion-expand-icon collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= tab._id %>" aria-expanded="false" aria-controls="collapse<%= tab._id %>">
+              <input class="form-control form-control-lg me-3 border-0" id="edit-title<%= tab._id %>" type="text"
+                name="tabs[<%= tab %>][title]" value="<%= tab.title %>" placeholder="Title 1">
+              <button class="btn accordion-expand-icon collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse<%= tab._id %>" aria-expanded="false" aria-controls="collapse<%= tab._id %>">
                 <svg width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path>
+                  <path fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z">
+                  </path>
                 </svg>
               </button>
             </div>
           </h2>
-  
-  
-          <div id="collapse<%= tab._id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= tab._id %>" data-bs-parent="#accordionExample">
-          
-            <% for (let section of tab.sections) { %>
-            <div class="accordion-body">
-  
-              <% if (!section.image.source || !section.image.filename ) { %> 
-              <% } else { %>  
-                <a href="<%= section.buttons.url %> " target="_blank"><img class="img-fluid mb-3 displayed-img" src="<%= section.image.source %> " alt="palceholder"></a>
-              <% } %> 
-                      
-              <h2 class="mb-0" style="font-weight:bold"><%= section.heading %></h2>
-              <h6 class="text-muted" style="font-weight:bold"><%= section.subheading %></h6>
-              <p><%= section.information %></p>
-              
-              <% if (!section.buttons) { %> 
-              <% } else { %> 
-                <% for(let button of section.buttons) { %>
-                <div class="row">
-                    <a class="btn btn-outline-dark mb-2" href="<%= button.url %>" target="_blank"><%= button.text %></a>
+
+
+          <div id="collapse<%= tab._id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= tab._id %>"
+            data-bs-parent="#accordionExample">
+
+            <div id="sortable-section">
+
+              <% for (let section of tab.sections) { %>
+                <div class="accordion-body" id="accordion-body-sortable" style="padding-left: 48px; padding-right: 48px;">
+
+                  <% if (!section.image.source || !section.image.filename ) { %>
+                    <% } else { %>
+                      <a href="<%= section.buttons.url %> " target="_blank"><img class="img-fluid mb-3 displayed-img"
+                          src="<%= section.image.source %> " alt="palceholder"></a>
+                      <% } %>
+
+                        <h2 class="mb-0" style="font-weight:bold">
+                          <%= section.heading %>
+                        </h2>
+                        <h6 class="text-muted" style="font-weight:bold">
+                          <%= section.subheading %>
+                        </h6>
+                        <p>
+                          <%= section.information %>
+                        </p>
+
+                        <% if (!section.buttons) { %>
+                          <% } else { %>
+                            <% for(let button of section.buttons) { %>
+                              <div class="row" style="padding: 0 10px 0 10px;">
+                                <a class="btn btn-outline-dark mb-2" href="<%= button.url %>" target="_blank">
+                                  <%= button.text %>
+                                </a>
+                              </div>
+                              <% } %>
+                                <% } %>
+
                 </div>
-                <% } %> 
-              <% } %> 
-  
+                <% } %>
+
             </div>
-            <% } %>
-  
+
           </div>
-      
+
         </div>
-        <% } %> 
-  
+        <% } %>
+
     </div>
   </form>
 
+  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+  <script>
+    var el = document.getElementById('accordionExample');
+    new Sortable.create(el, {
+      animation: 200,
+      ghostClass: 'sortable-ghost',
+      handle: '.accordion-handle',
+      onEnd: (evt) => {
+        console.log(evt.newIndex);
+      },
+    });
 
+    var section = document.getElementById('sortable-section');
+    new Sortable.create(section, {
+      animation: 200,
+      ghostClass: 'sortable-ghost',
+      onEnd: (evt) => {
+        console.log(evt.newIndex);
+      },
+    });
 
+    var body = document.querySelectorAll('.accordion-body');
+    for (var item of body){
+      new Sortable.create(item, {
+      animation: 200,
+      ghostClass: 'sortable-ghost',
+      onEnd: (evt) => {
+        console.log(evt.newIndex);
+      },
+    });
+    }
 
+  </script>
 
-<%- include('../partials/js/editScripts') %>
+  <%- include('../partials/js/editScripts') %>

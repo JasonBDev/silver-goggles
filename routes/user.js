@@ -5,7 +5,6 @@ const User = require('../models/user');
 const passport = require('passport');
 const { isLoggedIn } = require('../middleware');
 
-
 router.get('/login', (req, res) => {
     const pageTitle = 'Login';
     res.render('users/login', { pageTitle });
@@ -179,18 +178,13 @@ router.post('/register', async (req, res, next) => {
     }
 });
 
+
 router.get('/admin', isLoggedIn, async (req, res) => {
-    const currentUser = req.user._id;                                                      //sets currentUser to the username of the person who just logged in
-    const accordion = await Accordion.findOne({ "user": currentUser });
+    //sets currentUser to the username of the person who just logged in
+    const accordion = await Accordion.findOne({ "user": req.user._id });
     const pageTitle = 'Admin';
     res.render('users/loggedin', { accordion, pageTitle });
 });
-
-// router.post('/admin', isLoggedIn, async (req, res) => {
-//     const accordion = new Accordion(req.body);
-//     await accordion.save();
-//     res.redirect('/admin');
-// });
 
 router.put('/admin', isLoggedIn, async (req, res) => {
     const currentUser = req.user._id;
@@ -204,12 +198,5 @@ router.get('/logout', (req, res) => {
     req.flash('success', 'Successfully logged out.');
     res.redirect('/');
 })
-
-// router.get('/TEST', (req, res) => {
-//     const pageTitle = 'TEST';
-//     res.render('accordions/TESTedit', { pageTitle });
-// })
-
-
 
 module.exports = router;

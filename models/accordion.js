@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-
 const AccordionSchema = new Schema({
     tabs:
         [
@@ -36,40 +34,6 @@ const AccordionSchema = new Schema({
         ref: 'User',
     }
 });
-
-
-//-------------------------------POTENTIAL FUTURE SCHEMA--------------------------------
-// const AccordionSchema = new Schema({
-//     tabs:
-//         [
-//             {
-//                 title: String,
-//                 sections:
-//                     [
-//                         {
-//                             images:
-//                                 [
-//                                     {
-//                                         source: String,
-//                                         filename: String,
-//                                         link: String,
-//                                     },
-//                                 ],
-//                             heading: [String],
-//                             subheading: [String],
-//                             information: [String],
-//                             buttons:
-//                                 [
-//                                     {
-//                                         text: String,
-//                                         url: String,
-//                                     },
-//                                 ],
-//                         }
-//                     ],
-//             }
-//         ]
-// });
 
 
 module.exports = mongoose.model('Accordion', AccordionSchema);

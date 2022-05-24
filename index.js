@@ -10,17 +10,10 @@ const passport = require('passport');
 const localStrategy = require('passport-local');
 const User = require('./models/user');
 
-
-
-
 const userRoutes = require('./routes/user');
 const siteRoutes = require('./routes/site');
 
-
-
-
-
-mongoose.connect('mongodb://localhost:27017/webApp')
+mongoose.connect('mongodb+srv://admin:0363Kf2pIQmbMVNw@cluster0.nm3ml.mongodb.net/?retryWrites=true&w=majority')
     .then(() => {
         console.log("MONGO-DB CONNECTION OPEN");
     })
@@ -29,9 +22,11 @@ mongoose.connect('mongodb://localhost:27017/webApp')
         console.log(err);
     });
 
+const app = express();    
 
-const app = express();                                      //initalized the express app
+app.locals.Sortable = require('sortablejs');
 
+//0363Kf2pIQmbMVNw
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');                              //ejs is the main viewing engine since we will be templating with ejs
@@ -75,11 +70,8 @@ app.use((req, res, next) => {
     next();
 });
 
-
 app.use('/', userRoutes);
 app.use('/', siteRoutes);
-
-
 
 //the main page, ie: the sites page for example yelp-camp.com
 app.get('/', (req, res) => {
@@ -101,11 +93,6 @@ app.use((err, req, res, next) => {
     const pageTitle = `${statusCode} Error`;
     res.status(statusCode).render('errors', { pageTitle, err });
 });
-
-
-
-
-
 
 const port = 3000;
 app.listen(port, () => {
