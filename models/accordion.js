@@ -18,13 +18,13 @@ const AccordionSchema = new Schema({
                             heading: String,
                             subheading: String,
                             information: String,
-                            buttons:
-                                [
-                                    {
-                                        text: String,
-                                        url: String,
-                                    },
-                                ],
+                            buttons: 
+                            [
+                                {
+                                    text: String,
+                                    url: String,
+                                },
+                            ],
                         }
                     ],
             }

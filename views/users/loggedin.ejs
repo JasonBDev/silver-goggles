@@ -1,12 +1,12 @@
 <% layout('layouts/userBoilerplate') %>
 
-  <form id="new-tab-form" action="/admin?_method=PUT" method="POST">
+  <div id="new-tab-form" action="/admin?_method=PUT" method="POST">
     <div class="row">
       <div class="col-auto me-auto">
         <button onclick="createTab()" type="button" class="btn btn-link btn-sm" id="add-tab-button">Add Tab</button>
       </div>
       <div class="col-auto">
-        <button class="btn btn-link btn-sm" type="submit" id="edit-tab-button">Save</button>
+        <button class="btn btn-link btn-sm" onclick="test()" id="edit-tab-button">Save</button>
       </div>
     </div>
 
@@ -38,41 +38,107 @@
             </div>
           </h2>
 
-
           <div id="collapse<%= tab._id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= tab._id %>"
             data-bs-parent="#accordionExample">
 
             <div id="sortable-section">
 
               <% for (let section of tab.sections) { %>
-                <div class="accordion-body" id="accordion-body-sortable" style="padding-left: 48px; padding-right: 48px;">
 
-                  <% if (!section.image.source || !section.image.filename ) { %>
-                    <% } else { %>
-                      <a href="<%= section.buttons.url %> " target="_blank"><img class="img-fluid mb-3 displayed-img"
-                          src="<%= section.image.source %> " alt="palceholder"></a>
-                      <% } %>
+                <div id="accordion-body-sortable"
+                  style="display: flex; flex-direction: row; padding-left: 8px; padding-right: 48px; align-items: center;">
 
-                        <h2 class="mb-0" style="font-weight:bold">
-                          <%= section.heading %>
-                        </h2>
-                        <h6 class="text-muted" style="font-weight:bold">
-                          <%= section.subheading %>
-                        </h6>
-                        <p>
-                          <%= section.information %>
-                        </p>
+                  <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                    style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                      clip-rule="evenodd" />
+                  </svg>
 
-                        <% if (!section.buttons) { %>
-                          <% } else { %>
-                            <% for(let button of section.buttons) { %>
-                              <div class="row" style="padding: 0 10px 0 10px;">
-                                <a class="btn btn-outline-dark mb-2" href="<%= button.url %>" target="_blank">
-                                  <%= button.text %>
-                                </a>
-                              </div>
-                              <% } %>
+                  <div class="accordion-body" style="width: 100%; padding: 8px 8px 20px 8px;">
+
+                    <% if (!section.image.source || !section.image.filename ) { %>
+                      <% } else { %>
+                        <div style="display: flex; flex-direction: row; align-items: center;">
+
+                          <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                            style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                              clip-rule="evenodd" />
+                          </svg>
+
+                          <a href="<%= section.buttons.url %> " target="_blank"><img
+                              class="img-fluid mb-3 displayed-img" src="<%= section.image.source %> " alt="palceholder">
+                          </a>
+                        </div>
+                        <% } %>
+
+                          <div id="main-heading" style="display: flex; flex-direction: row; align-items: center;">
+                            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+                              viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                clip-rule="evenodd" />
+                            </svg>
+                            <h2 class="mb-0" style="font-weight:bold; margin-top: -2px;">
+                              <%= section.heading %>
+                            </h2>
+                          </div>
+
+
+                          <div id="sub-heading" style="display: flex; flex-direction: row; align-items: center;">
+                            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+                              viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                clip-rule="evenodd" />
+                            </svg>
+                            <h6 class="text-muted" style="font-weight:bold; margin-top: 8px;">
+                              <%= section.subheading %>
+                            </h6>
+                          </div>
+
+                          <div id="information" style="display: flex; flex-direction: row; align-items: center;">
+                            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+                              viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                clip-rule="evenodd" />
+                            </svg>
+                            <p style="margin-top: 14px;">
+                              <%= section.information %>
+                            </p>
+                          </div>
+
+
+                          <% if (!section.buttons) { %>
+                            <% } else { %>
+                              <% for(let button of section.buttons) { %>
+                                <div id="a-button"
+                                  style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+                                  <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                                    style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 26px;'
+                                    viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                      clip-rule="evenodd" />
+                                  </svg>
+                                  <div class="row" style="width: 100%">
+                                    <a class="btn btn-outline-dark" href="<%= button.url %>" target="_blank">
+                                      <%= button.text %>
+                                    </a>
+                                  </div>
+                                </div>
                                 <% } %>
+                                  <% } %>
+
+                  </div>
 
                 </div>
                 <% } %>
@@ -85,14 +151,37 @@
         <% } %>
 
     </div>
-  </form>
+  </div>
 
   <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
   <script>
+
+    function test() {
+      const accordion_items = document.querySelectorAll('.accordion-item');
+
+      for (var item of accordion_items) {
+
+        //Gets header text
+        const header = item.querySelector('.accordion-header');
+        const header_text = header.querySelector('input[type=text]');
+        console.log(header_text.value);
+
+        //Get body
+        var accordion_body = item.querySelector('.accordion-body');
+
+        console.log(accordion_body.children);
+
+        for(var item of accordion_body.children){
+          console.log();
+        }
+
+      }
+
+    }
+
     var el = document.getElementById('accordionExample');
     new Sortable.create(el, {
       animation: 200,
-      ghostClass: 'sortable-ghost',
       handle: '.accordion-handle',
       onEnd: (evt) => {
         console.log(evt.newIndex);
@@ -102,23 +191,29 @@
     var section = document.getElementById('sortable-section');
     new Sortable.create(section, {
       animation: 200,
-      ghostClass: 'sortable-ghost',
+      ghostClass: 'blue-background-class',
       onEnd: (evt) => {
         console.log(evt.newIndex);
       },
     });
 
     var body = document.querySelectorAll('.accordion-body');
-    for (var item of body){
+    for (var item of body) {
       new Sortable.create(item, {
-      animation: 200,
-      ghostClass: 'sortable-ghost',
-      onEnd: (evt) => {
-        console.log(evt.newIndex);
-      },
-    });
+        animation: 200,
+        ghostClass: 'blue-background-class',
+        onEnd: (evt) => {
+          console.log(evt.newIndex);
+        },
+      });
     }
 
   </script>
+
+  <style>
+    .blue-background-class {
+      background-color: rgba(0, 140, 255, 0.05);
+    }
+  </style>
 
   <%- include('../partials/js/editScripts') %>
