@@ -6,77 +6,72 @@
         <button onclick="createTab()" type="button" class="btn btn-link btn-sm" id="add-tab-button">Add Tab</button>
       </div>
       <div class="col-auto">
-        <button class="btn btn-link btn-sm" onclick="test()" id="edit-tab-button">Save</button>
+        <button class="btn btn-link btn-sm" onclick="save()" id="edit-tab-button">Save</button>
       </div>
     </div>
 
     <div class="accordion" id="accordionExample">
 
       <% for(let tab of accordion.tabs) { %>
-        <div class="accordion-item">
 
-          <h2 class="accordion-header" id="heading<%= tab._id %>">
-            <div class="d-flex align-items-center p-2">
-              <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
-                fill="currentColor">
-                <path fill-rule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd" />
-              </svg>
-              <label class="visually-hidden" for="edit-title<%= tab._id %>"></label>
-              <input class="form-control form-control-lg me-3 border-0" id="edit-title<%= tab._id %>" type="text"
-                name="tabs[<%= tab %>][title]" value="<%= tab.title %>" placeholder="Title 1">
-              <button class="btn accordion-expand-icon collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapse<%= tab._id %>" aria-expanded="false" aria-controls="collapse<%= tab._id %>">
-                <svg width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+          <div id="tab-<%= tab._id %>" class="accordion-item">
+
+            <h2 class="accordion-header" id="heading<%= tab._id %>">
+              <div class="d-flex align-items-center p-2">
+                <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                  style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
+                  fill="currentColor">
                   <path fill-rule="evenodd"
-                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z">
-                  </path>
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clip-rule="evenodd" />
                 </svg>
-              </button>
-            </div>
-          </h2>
-
-          <div id="collapse<%= tab._id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= tab._id %>"
-            data-bs-parent="#accordionExample">
-
-            <div id="sortable-section">
-
-              <% for (let section of tab.sections) { %>
-
-                <div id="accordion-body-sortable"
-                  style="display: flex; flex-direction: row; padding-left: 8px; padding-right: 48px; align-items: center;">
-
-                  <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                    style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
-                    fill="currentColor">
-                    <path fill-rule="evenodd"
-                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                      clip-rule="evenodd" />
+                <label class="visually-hidden" for="edit-title<%= tab._id %>"></label>
+                <input class="form-control form-control-lg me-3 border-0" id="edit-title<%= tab._id %>" type="text"
+                  name="tabs[<%= tab %>][title]" value="<%= tab.title %>" placeholder="Title 1">
+                <button onclick="deleteById('<%- tab._id %>')"
+                  style="display: flex; justify-items: center; align-items:center; width: 25px; height: 25px; padding: 0; margin: 0; background-color: white; border: none">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>
+                </button>
+                <button class="btn accordion-expand-icon collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse<%= tab._id %>" aria-expanded="false" aria-controls="collapse<%= tab._id %>">
+                  <svg width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+            </h2>
 
-                  <div class="accordion-body" style="width: 100%; padding: 8px 8px 20px 8px;">
+            <div id="collapse<%= tab._id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= tab._id %>"
+              data-bs-parent="#accordionExample">
 
-                    <% if (!section.image.source || !section.image.filename ) { %>
-                      <% } else { %>
-                        <div style="display: flex; flex-direction: row; align-items: center;">
+              <div id="sortable-section">
 
-                          <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                            style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
-                            viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                              clip-rule="evenodd" />
-                          </svg>
+                <% for (let section of tab.sections) { %>
 
-                          <a href="<%= section.buttons.url %> " target="_blank"><img
-                              class="img-fluid mb-3 displayed-img" src="<%= section.image.source %> " alt="palceholder">
-                          </a>
-                        </div>
-                        <% } %>
+                  <div id="accordion-body-sortable"
+                    style="display: flex; flex-direction: row; padding-left: 8px; padding-right: 48px; align-items: center;">
 
-                          <div id="main-heading" style="display: flex; flex-direction: row; align-items: center;">
+                    <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                      style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
+                      fill="currentColor">
+                      <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clip-rule="evenodd" />
+                    </svg>
+
+                    <div class="accordion-body" style="width: 100%; padding: 8px 8px 20px 8px;">
+
+                      <% for (let item of section) { %>
+
+                        <% if(item.type=='image' && item.name !='' && item.src !='' ) { %>
+                          <div style="display: flex; flex-direction: row; align-items: center;">
+
                             <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
                               style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
                               viewBox="0 0 20 20" fill="currentColor">
@@ -84,71 +79,91 @@
                                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
                                 clip-rule="evenodd" />
                             </svg>
-                            <h2 class="mb-0" style="font-weight:bold; margin-top: -2px;">
-                              <%= section.heading %>
-                            </h2>
+
+                            <a href="<%= item.url %> " target="_blank"><img class="img-fluid mb-3 displayed-img"
+                                src="<%= item.src %> " alt="palceholder">
+                            </a>
                           </div>
+                          <% } %>
 
+                            <% if(item.type=='heading' ) { %>
+                              <div id="main-heading" style="display: flex; flex-direction: row; align-items: center;">
+                                <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                                  style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+                                  viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd"
+                                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                    clip-rule="evenodd" />
+                                </svg>
+                                <h2 class="mb-0" style="font-weight:bold; margin-top: -2px;">
+                                  <%= item.text %>
+                                </h2>
+                              </div>
+                              <% } %>
 
-                          <div id="sub-heading" style="display: flex; flex-direction: row; align-items: center;">
-                            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
-                              viewBox="0 0 20 20" fill="currentColor">
-                              <path fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                clip-rule="evenodd" />
-                            </svg>
-                            <h6 class="text-muted" style="font-weight:bold; margin-top: 8px;">
-                              <%= section.subheading %>
-                            </h6>
-                          </div>
-
-                          <div id="information" style="display: flex; flex-direction: row; align-items: center;">
-                            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
-                              viewBox="0 0 20 20" fill="currentColor">
-                              <path fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                clip-rule="evenodd" />
-                            </svg>
-                            <p style="margin-top: 14px;">
-                              <%= section.information %>
-                            </p>
-                          </div>
-
-
-                          <% if (!section.buttons) { %>
-                            <% } else { %>
-                              <% for(let button of section.buttons) { %>
-                                <div id="a-button"
-                                  style="display: flex; flex-direction: row; align-items: center; width: 100%;">
-                                  <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                                    style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 26px;'
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                      clip-rule="evenodd" />
-                                  </svg>
-                                  <div class="row" style="width: 100%">
-                                    <a class="btn btn-outline-dark" href="<%= button.url %>" target="_blank">
-                                      <%= button.text %>
-                                    </a>
+                                <% if(item.type=='subheading' ) { %>
+                                  <div id="sub-heading"
+                                    style="display: flex; flex-direction: row; align-items: center;">
+                                    <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                                      style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+                                      viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd"
+                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                        clip-rule="evenodd" />
+                                    </svg>
+                                    <h6 class="text-muted" style="font-weight:bold; margin-top: 8px;">
+                                      <%= item.text %>
+                                    </h6>
                                   </div>
-                                </div>
-                                <% } %>
                                   <% } %>
 
-                  </div>
+                                    <% if(item.type=='information' ) { %>
+                                      <div id="information"
+                                        style="display: flex; flex-direction: row; align-items: center;">
+                                        <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                                          style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+                                          viewBox="0 0 20 20" fill="currentColor">
+                                          <path fill-rule="evenodd"
+                                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                            clip-rule="evenodd" />
+                                        </svg>
+                                        <p style="margin-top: 14px;">
+                                          <%= item.text %>
+                                        </p>
+                                      </div>
+                                      <% } %>
 
-                </div>
-                <% } %>
+                                        <% if(item.type=='button' ) { %>
+                                          <div id="a-button"
+                                            style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+                                            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                                              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 26px;'
+                                              viewBox="0 0 20 20" fill="currentColor">
+                                              <path fill-rule="evenodd"
+                                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                                clip-rule="evenodd" />
+                                            </svg>
+                                            <div class="row" style="width: 100%">
+                                              <a class="btn btn-outline-dark" href="<%= item.url %>" target="_blank">
+                                                <%= item.text %>
+                                              </a>
+                                            </div>
+                                          </div>
+                                          <% } %>
+
+                                            <% } %>
+
+                    </div>
+
+                  </div>
+                  <% } %>
+
+              </div>
 
             </div>
 
           </div>
-
-        </div>
-        <% } %>
+          <% } %>
 
     </div>
   </div>
@@ -156,15 +171,23 @@
   <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
   <script>
 
-    function test() {
+    function deleteById(id) {
+      document.getElementById('tab-' + id).remove();
+    }
+
+    function save() {
 
       var tabs = []
 
       const accordion_items = document.querySelectorAll('.accordion-item');
 
+      console.log(accordion_items);
+
       for (var item of accordion_items) {
 
-        if (item.id != '') {
+        if (!item.id.includes('tab')) {
+
+          console.log('new');
 
           //New item
           var tab = {
@@ -178,57 +201,61 @@
           tab.title = header_text.value;
 
           //Get body
-          var accordion_body = item.querySelector('.accordion-body');
-          console.log(accordion_body);
-          if (accordion_body != null) {
+          var accordion_bodies = item.querySelectorAll('.accordion-body');
 
-            var section = [];
+          if (accordion_bodies != null) {
 
-            for (var item of accordion_body.firstChild.querySelectorAll('div')) {
-              if (item.id.includes('-image-')) {
-                if (item.querySelector('input').files.length != 0) {
+            for (var accordion_body of accordion_bodies) {
+
+              var section = [];
+
+              for (var item of accordion_body.firstChild.querySelectorAll('div')) {
+                if (item.id.includes('-image-')) {
+                  if (item.querySelector('input').files.length != 0) {
+                    section.push({
+                      type: 'image',
+                      filename: item.querySelector('input').files[0].name,
+                      source: item.querySelector('input').value,
+                      url: 'http://localhost:3000/' + item.querySelector('input').files[0].name,
+                    })
+                  } else {
+                    section.push({
+                      type: 'image',
+                      name: '',
+                      src: '',
+                    })
+                  }
+                } else if (item.id.includes('-head-')) {
+                  //console.log(item.querySelector('input').value);
                   section.push({
-                    type: 'image',
-                    filename: item.querySelector('input').files[0].name,
-                    source: item.querySelector('input').value,
-                    url: 'http://localhost:3000/' + item.querySelector('input').files[0].name,
+                    type: 'heading',
+                    text: item.querySelector('input').value
                   })
-                } else {
+                } else if (item.id.includes('-subhead-')) {
+                  //console.log(item.querySelector('input').value);
                   section.push({
-                    type: 'image',
-                    name: '',
-                    src: '',
+                    type: 'subheading',
+                    text: item.querySelector('input').value
+                  })
+                } else if (item.id.includes('-information-')) {
+                  //console.log(item.querySelector('textarea').value);
+                  section.push({
+                    type: 'information',
+                    text: item.querySelector('textarea').value
+                  })
+                } else if (item.id.includes('-button-')) {
+                  //console.log(item.querySelectorAll('input'));
+                  section.push({
+                    type: 'button',
+                    text: item.querySelectorAll('input')[0].value,
+                    url: item.querySelectorAll('input')[1].value
                   })
                 }
-              } else if (item.id.includes('-head-')) {
-                //console.log(item.querySelector('input').value);
-                section.push({
-                  type: 'heading',
-                  text: item.querySelector('input').value
-                })
-              } else if (item.id.includes('-subhead-')) {
-                //console.log(item.querySelector('input').value);
-                section.push({
-                  type: 'subheading',
-                  text: item.querySelector('input').value
-                })
-              } else if (item.id.includes('-information-')) {
-                //console.log(item.querySelector('textarea').value);
-                section.push({
-                  type: 'information',
-                  text: item.querySelector('textarea').value
-                })
-              } else if (item.id.includes('-button-')) {
-                //console.log(item.querySelectorAll('input'));
-                section.push({
-                  type: 'button',
-                  text: item.querySelectorAll('input')[0].value,
-                  url: item.querySelectorAll('input')[1].value
-                })
               }
-            }
 
-            tab.sections.push(section);
+              tab.sections.push(section);
+
+            }
 
           }
 
@@ -236,6 +263,8 @@
 
         } else {
           //Old item
+
+          console.log('old');
 
           var tab = {
             title: '',
@@ -248,40 +277,41 @@
           tab.title = header_text.value;
 
           //Get body
-          var accordion_body = item.querySelector('.accordion-body');
+          var accordion_bodies = item.querySelectorAll('.accordion-body');
 
-          var section = []
+          for (var accordion_body of accordion_bodies) {
+            var section = []
 
-          if (accordion_body != null) {
+            if (accordion_body != null) {
 
-            for (var item of accordion_body.children) {
-              if (item.id == 'main-heading') {
-                section.push({
-                  type: 'heading',
-                  text: item.querySelector('h2').innerHTML.trim()
-                })
-              } else if (item.id == 'sub-heading') {
-                section.push({
-                  type: 'subheading',
-                  text: item.querySelector('h6').innerHTML.trim()
-                })
-              } else if (item.id == 'information') {
-                section.push({
-                  type: 'information',
-                  text: item.querySelector('p').innerHTML.trim()
-                })
+              for (var item of accordion_body.children) {
+                if (item.id == 'main-heading') {
+                  section.push({
+                    type: 'heading',
+                    text: item.querySelector('h2').innerHTML.trim()
+                  })
+                } else if (item.id == 'sub-heading') {
+                  section.push({
+                    type: 'subheading',
+                    text: item.querySelector('h6').innerHTML.trim()
+                  })
+                } else if (item.id == 'information') {
+                  section.push({
+                    type: 'information',
+                    text: item.querySelector('p').innerHTML.trim()
+                  })
 
-              } else if (item.id == 'a-button') {
-                section.push({
-                  type: 'button',
-                  url: item.querySelector('a').href.trim(),
-                  text: item.querySelector('a').innerHTML.trim()
-                })
+                } else if (item.id == 'a-button') {
+                  section.push({
+                    type: 'button',
+                    url: item.querySelector('a').href.trim(),
+                    text: item.querySelector('a').innerHTML.trim()
+                  })
+                }
               }
+
+              tab.sections.push(section);
             }
-
-            tab.sections.push(section);
-
           }
 
           tabs.push(tab);
@@ -289,6 +319,8 @@
         }
 
       }
+
+      console.log(tabs);
 
       var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
       xmlhttp.open("POST", '/admin');
@@ -313,14 +345,16 @@
       },
     });
 
-    var section = document.getElementById('sortable-section');
-    new Sortable.create(section, {
-      animation: 200,
-      ghostClass: 'blue-background-class',
-      onEnd: (evt) => {
-        console.log(evt.newIndex);
-      },
-    });
+    var section = document.querySelectorAll('#sortable-section');
+    for (var item of section) {
+      new Sortable.create(item, {
+        animation: 200,
+        ghostClass: 'blue-background-class',
+        onEnd: (evt) => {
+          console.log(evt.newIndex);
+        },
+      });
+    }
 
     var body = document.querySelectorAll('.accordion-body');
     for (var item of body) {

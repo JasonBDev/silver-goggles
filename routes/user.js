@@ -178,17 +178,12 @@ router.post('/register', async (req, res, next) => {
     }
 });
 
-function jsFriendlyJSONStringify(s) {
-    return JSON.stringify(s).
-        replace(/\\r/g, '\r').
-        replace(/\\n/g, '\n')
-}
-
 router.get('/admin', isLoggedIn, async (req, res) => {
     //sets currentUser to the username of the person who just logged in
     const accordion = await Accordion.findOne({ "user": req.user._id });
+    console.log(accordion);
     const pageTitle = 'Admin';
-    res.render('users/loggedin', { accordion: accordion, pageTitle });
+    res.render('users/loggedin', { accordion, pageTitle });
 });
 
 router.post('/admin', isLoggedIn, async (req, res) => {

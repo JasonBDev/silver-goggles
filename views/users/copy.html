@@ -1,0 +1,80 @@
+<% if (!section.image.source || !section.image.filename ) { %>
+    <% } else { %>
+      <div style="display: flex; flex-direction: row; align-items: center;">
+
+        <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+          style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+          viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clip-rule="evenodd" />
+        </svg>
+
+        <a href="<%= section.buttons.url %> " target="_blank"><img
+            class="img-fluid mb-3 displayed-img" src="<%= section.image.source %> "
+            alt="palceholder">
+        </a>
+      </div>
+      <% } %>
+
+        <div id="main-heading" style="display: flex; flex-direction: row; align-items: center;">
+          <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+            style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+            viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd" />
+          </svg>
+          <h2 class="mb-0" style="font-weight:bold; margin-top: -2px;">
+            <%= section.heading %>
+          </h2>
+        </div>
+
+
+        <div id="sub-heading" style="display: flex; flex-direction: row; align-items: center;">
+          <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+            style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+            viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd" />
+          </svg>
+          <h6 class="text-muted" style="font-weight:bold; margin-top: 8px;">
+            <%= section.subheading %>
+          </h6>
+        </div>
+
+        <div id="information" style="display: flex; flex-direction: row; align-items: center;">
+          <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+            style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+            viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd" />
+          </svg>
+          <p style="margin-top: 14px;">
+            <%= section.information %>
+          </p>
+        </div>
+
+
+        <% if (!section.buttons) { %>
+          <% } else { %>
+            <% for(let button of section.buttons) { %>
+              <div id="a-button"
+                style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+                <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                  style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 26px;'
+                  viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clip-rule="evenodd" />
+                </svg>
+                <div class="row" style="width: 100%">
+                  <a class="btn btn-outline-dark" href="<%= button.url %>" target="_blank">
+                    <%= button.text %>
+                  </a>
+                </div>
+              </div>
+            <% } %>
+        <% } %>

@@ -3,25 +3,19 @@ const Schema = mongoose.Schema;
 
 const AccordionSchema = new Schema({
     tabs: [{
-
+        title: String,
+        sections: [
+            [
+                
+            ]
+        ],
     }],
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
     }
-});
+}, { _id: true });
 
-// title: String,
-//     sections: [
-//         [
-//             {
-//                 type: String,
-//                 text: String,
-//                 filename: String,
-//                 source: String,
-//                 url: String,
-//             },
-//         ]
-//     ], 
+
 
 module.exports = mongoose.model('Accordion', AccordionSchema);
