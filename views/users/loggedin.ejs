@@ -157,25 +157,150 @@
   <script>
 
     function test() {
+
+      var tabs = []
+
       const accordion_items = document.querySelectorAll('.accordion-item');
 
       for (var item of accordion_items) {
 
-        //Gets header text
-        const header = item.querySelector('.accordion-header');
-        const header_text = header.querySelector('input[type=text]');
-        console.log(header_text.value);
+        if (item.id != '') {
 
-        //Get body
-        var accordion_body = item.querySelector('.accordion-body');
+          //New item
+          var tab = {
+            title: '',
+            sections: []
+          }
 
-        console.log(accordion_body.children);
+          //Gets header text
+          const header = item.querySelector('.accordion-header');
+          const header_text = header.querySelector('input[type=text]');
+          tab.title = header_text.value;
 
-        for(var item of accordion_body.children){
-          console.log();
+          //Get body
+          var accordion_body = item.querySelector('.accordion-body');
+          console.log(accordion_body);
+          if (accordion_body != null) {
+
+            var section = [];
+
+            for (var item of accordion_body.firstChild.querySelectorAll('div')) {
+              if (item.id.includes('-image-')) {
+                if (item.querySelector('input').files.length != 0) {
+                  section.push({
+                    type: 'image',
+                    filename: item.querySelector('input').files[0].name,
+                    source: item.querySelector('input').value,
+                    url: 'http://localhost:3000/' + item.querySelector('input').files[0].name,
+                  })
+                } else {
+                  section.push({
+                    type: 'image',
+                    name: '',
+                    src: '',
+                  })
+                }
+              } else if (item.id.includes('-head-')) {
+                //console.log(item.querySelector('input').value);
+                section.push({
+                  type: 'heading',
+                  text: item.querySelector('input').value
+                })
+              } else if (item.id.includes('-subhead-')) {
+                //console.log(item.querySelector('input').value);
+                section.push({
+                  type: 'subheading',
+                  text: item.querySelector('input').value
+                })
+              } else if (item.id.includes('-information-')) {
+                //console.log(item.querySelector('textarea').value);
+                section.push({
+                  type: 'information',
+                  text: item.querySelector('textarea').value
+                })
+              } else if (item.id.includes('-button-')) {
+                //console.log(item.querySelectorAll('input'));
+                section.push({
+                  type: 'button',
+                  text: item.querySelectorAll('input')[0].value,
+                  url: item.querySelectorAll('input')[1].value
+                })
+              }
+            }
+
+            tab.sections.push(section);
+
+          }
+
+          tabs.push(tab);
+
+        } else {
+          //Old item
+
+          var tab = {
+            title: '',
+            sections: []
+          }
+
+          //Gets header text
+          const header = item.querySelector('.accordion-header');
+          const header_text = header.querySelector('input[type=text]');
+          tab.title = header_text.value;
+
+          //Get body
+          var accordion_body = item.querySelector('.accordion-body');
+
+          var section = []
+
+          if (accordion_body != null) {
+
+            for (var item of accordion_body.children) {
+              if (item.id == 'main-heading') {
+                section.push({
+                  type: 'heading',
+                  text: item.querySelector('h2').innerHTML.trim()
+                })
+              } else if (item.id == 'sub-heading') {
+                section.push({
+                  type: 'subheading',
+                  text: item.querySelector('h6').innerHTML.trim()
+                })
+              } else if (item.id == 'information') {
+                section.push({
+                  type: 'information',
+                  text: item.querySelector('p').innerHTML.trim()
+                })
+
+              } else if (item.id == 'a-button') {
+                section.push({
+                  type: 'button',
+                  url: item.querySelector('a').href.trim(),
+                  text: item.querySelector('a').innerHTML.trim()
+                })
+              }
+            }
+
+            tab.sections.push(section);
+
+          }
+
+          tabs.push(tab);
+
         }
 
       }
+
+      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+      xmlhttp.open("POST", '/admin');
+      xmlhttp.onreadystatechange = function () { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+          location.reload();
+        }
+      }
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.send(JSON.stringify(tabs));
+
+      console.log(tabs);
 
     }
 

@@ -12,6 +12,7 @@ const User = require('./models/user');
 
 const userRoutes = require('./routes/user');
 const siteRoutes = require('./routes/site');
+const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb+srv://admin:0363Kf2pIQmbMVNw@cluster0.nm3ml.mongodb.net/?retryWrites=true&w=majority')
     .then(() => {
@@ -34,7 +35,9 @@ app.set('views', path.join(__dirname, 'views'));            //views folder is av
 
 app.use(express.static(path.join(__dirname, 'public')));    //ability to use static documents like style sheets from the main directory
 app.use(express.urlencoded({ extended: true }));            //allows the app to take in form responses form client side
-app.use(methodOverride('_method'));                         //use the sting "?_method" at the end of the "action" part of a form HTML attribute
+app.use(methodOverride('_method'));     
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())                    //use the sting "?_method" at the end of the "action" part of a form HTML attribute
 
 
 const sessionConfig = {

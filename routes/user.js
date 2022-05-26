@@ -191,13 +191,13 @@ router.get('/admin', isLoggedIn, async (req, res) => {
     res.render('users/loggedin', { accordion: accordion, pageTitle });
 });
 
-router.put('/admin', isLoggedIn, async (req, res) => {
-    const body = jsFriendlyJSONStringify(req.body);
-    console.log(body);
+router.post('/admin', isLoggedIn, async (req, res) => {
+
+    console.log(req.body);
     const currentUser = req.user._id;
-    const accordion = await Accordion.findOneAndUpdate({ "user": currentUser }, { body }, { runValidators: true, new: true });
+    const accordion = await Accordion.findOneAndUpdate({ "user": currentUser }, { tabs: req.body }, { runValidators: true, new: true });
     await accordion.save();
-    res.redirect('/admin');
+    res.json({success: true});
 });
 
 router.get('/logout', (req, res) => {
