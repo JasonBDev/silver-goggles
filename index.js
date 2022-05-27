@@ -14,7 +14,7 @@ const userRoutes = require('./routes/user');
 const siteRoutes = require('./routes/site');
 const bodyParser = require('body-parser');
 
-mongoose.connect('mongodb+srv://admin:0363Kf2pIQmbMVNw@cluster0.nm3ml.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb://localhost:27017')
     .then(() => {
         console.log("MONGO-DB CONNECTION OPEN");
     })
