@@ -5,9 +5,7 @@ const AccordionSchema = new Schema({
     tabs: [{
         title: String,
         sections: [
-            [
-                
-            ]
+            []
         ],
     }],
     user: {

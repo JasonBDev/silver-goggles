@@ -72,6 +72,26 @@ function createTitle() {
     inputTitle.setAttribute('name', `tabs[${tabNum - 1}][title]`);
     inputTitle.setAttribute('placeholder', `Title ${tabNum}`);
 
+    // <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+    //     style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
+    //     fill="currentColor">
+    //     <path fill-rule="evenodd"
+    //         d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+    //         clip-rule="evenodd" />
+    // </svg>
+
+    const draggableHandle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    draggableHandle.classList.add('accordion-handle');
+    draggableHandle.setAttribute('style', 'width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; opacity: 0.6;');
+    draggableHandle.setAttribute('viewBox', '0 0 20 20');
+
+    const draggableHandlePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    draggableHandlePath.setAttribute('fill-rule', 'evenodd');
+    draggableHandlePath.setAttribute('d', 'M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z');
+    draggableHandlePath.setAttribute('clip-rule', 'evenodd');
+
+    draggableHandle.appendChild(draggableHandlePath);
+
     const button = document.createElement('button');
     button.classList.add('btn', 'accordion-expand-icon');
     button.setAttribute('type', 'button');
@@ -93,6 +113,7 @@ function createTitle() {
 
     h2.appendChild(div1);
     div1.appendChild(labelTitle);
+    div1.appendChild(draggableHandle);
     div1.appendChild(inputTitle);
     div1.appendChild(button);
     button.appendChild(svg);
@@ -103,6 +124,11 @@ function createTitle() {
 function createSectionPartOne() {
     const div1 = document.createElement('div');
     div1.setAttribute('id', `sections-tab${tabNum}`);
+
+    new Sortable.create(div1, {
+        animation: 200,
+        ghostClass: 'blue-background-class',
+    });
 
     const div3 = document.createElement('div');
     div3.classList.add('row', 'mx-3', 'my-2')
@@ -128,20 +154,45 @@ function createSectionPartTwo(t, s) {
     buttonNum = 1;
     document.querySelector(`#add-section-button-tab${t}`).setAttribute('onclick', `createSectionPartTwo(${t}, ${s + 1})`);
 
+    const container = document.createElement('div');
+    container.setAttribute('style', 'display: flex; flex-direction: row; align-items: center; padding-left: 10px;');
+
     const div1 = document.createElement('div');
     div1.classList.add('accordion-body', 'mb-2');
     div1.setAttribute('id', `accordion-body-tab${t}-section${s}`);
+    div1.setAttribute('style', 'width: 100%;');
 
     const div2 = document.createElement('div');
     div2.setAttribute('id', `content-tab${t}-section${s}`);
+
+    new Sortable.create(div2, {
+        animation: 200,
+        ghostClass: 'blue-background-class',
+    });
 
     const sectionDivider = document.createElement('h6');
     sectionDivider.classList.add('mb-3', 'text-muted', 'text-center');
     sectionDivider.innerText = `Section ${s}`;
 
+    const draggableHandle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    draggableHandle.classList.add('accordion-handle');
+    draggableHandle.setAttribute('style', 'width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; opacity: 0.6;');
+    draggableHandle.setAttribute('viewBox', '0 0 20 20');
+
+    const draggableHandlePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    draggableHandlePath.setAttribute('fill-rule', 'evenodd');
+    draggableHandlePath.setAttribute('d', 'M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z');
+    draggableHandlePath.setAttribute('clip-rule', 'evenodd');
+
+    draggableHandle.appendChild(draggableHandlePath);
+
+    container.appendChild(draggableHandle);
+
     div1.appendChild(div2);
     div2.appendChild(sectionDivider);
-    document.querySelector(`#sections-tab${t}`).appendChild(div1);
+
+    container.appendChild(div1);
+    document.querySelector(`#sections-tab${t}`).appendChild(container);
 
     createAddElementsButtons(t, s);
 
@@ -223,6 +274,19 @@ function createImage(t, s, iM = 1) {
     inputImage.setAttribute('placeholder', 'Choose Image');
     inputImage.setAttribute('accept', '.jpg, .png, .jpeg');
 
+    const draggableHandle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    draggableHandle.classList.add('accordion-handle');
+    draggableHandle.setAttribute('style', 'width: 20px; height: 20px; color: rgb(120,120,120); margin-right: 10px; opacity: 0.6;');
+    draggableHandle.setAttribute('viewBox', '0 0 20 20');
+
+    const draggableHandlePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    draggableHandlePath.setAttribute('fill-rule', 'evenodd');
+    draggableHandlePath.setAttribute('d', 'M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z');
+    draggableHandlePath.setAttribute('clip-rule', 'evenodd');
+
+    draggableHandle.appendChild(draggableHandlePath);
+
+    div1.appendChild(draggableHandle);
     div1.appendChild(div2);
     div2.appendChild(labelImage);
     labelImage.appendChild(labelSpan);
@@ -253,6 +317,19 @@ function createHead(t, s, h = 1) {
     inputHead.setAttribute('placeholder', 'Heading');
     inputHead.setAttribute('style', 'font-weight:bold');
 
+    const draggableHandle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    draggableHandle.classList.add('accordion-handle');
+    draggableHandle.setAttribute('style', 'width: 20px; height: 20px; color: rgb(120,120,120); opacity: 0.6;');
+    draggableHandle.setAttribute('viewBox', '0 0 20 20');
+
+    const draggableHandlePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    draggableHandlePath.setAttribute('fill-rule', 'evenodd');
+    draggableHandlePath.setAttribute('d', 'M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z');
+    draggableHandlePath.setAttribute('clip-rule', 'evenodd');
+
+    draggableHandle.appendChild(draggableHandlePath);
+
+    div1.appendChild(draggableHandle);
     div1.appendChild(labelHead);
     div1.appendChild(inputHead);
     document.querySelector(`#content-tab${t}-section${s}`).appendChild(div1);
@@ -281,6 +358,19 @@ function createSubhead(t, s, sH = 1) {
     inputSubhead.setAttribute('placeholder', 'Subheading');
     inputSubhead.setAttribute('style', 'font-weight:bold');
 
+    const draggableHandle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    draggableHandle.classList.add('accordion-handle');
+    draggableHandle.setAttribute('style', 'width: 20px; height: 20px; color: rgb(120,120,120); opacity: 0.6;');
+    draggableHandle.setAttribute('viewBox', '0 0 20 20');
+
+    const draggableHandlePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    draggableHandlePath.setAttribute('fill-rule', 'evenodd');
+    draggableHandlePath.setAttribute('d', 'M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z');
+    draggableHandlePath.setAttribute('clip-rule', 'evenodd');
+
+    draggableHandle.appendChild(draggableHandlePath);
+
+    div1.appendChild(draggableHandle);
     div1.appendChild(labelSubhead);
     div1.appendChild(inputSubhead);
     document.querySelector(`#content-tab${t}-section${s}`).appendChild(div1);
@@ -310,6 +400,19 @@ function createInformation(t, s, iN = 1) {
     inputInformation.setAttribute('rows', '5');
     inputInformation.setAttribute('data-min-rows', '5');
 
+    const draggableHandle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    draggableHandle.classList.add('accordion-handle');
+    draggableHandle.setAttribute('style', 'width: 20px; height: 20px; color: rgb(120,120,120); opacity: 0.6;');
+    draggableHandle.setAttribute('viewBox', '0 0 20 20');
+
+    const draggableHandlePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    draggableHandlePath.setAttribute('fill-rule', 'evenodd');
+    draggableHandlePath.setAttribute('d', 'M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z');
+    draggableHandlePath.setAttribute('clip-rule', 'evenodd');
+
+    draggableHandle.appendChild(draggableHandlePath);
+
+    div1.appendChild(draggableHandle);
     div1.appendChild(labelInformation);
     div1.appendChild(inputInformation);
     document.querySelector(`#content-tab${t}-section${s}`).appendChild(div1);
@@ -356,6 +459,19 @@ function createButton(t, s, b = 1) {
     inputURL.setAttribute('name', `tabs[${t - 1}][sections][${s - 1}][buttons][${b - 1}][url]`);
     inputURL.setAttribute('placeholder', 'url');
 
+    const draggableHandle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    draggableHandle.classList.add('accordion-handle');
+    draggableHandle.setAttribute('style', 'width: 20px; height: 20px; color: rgb(120,120,120); margin-left: -16px; margin-right: 10px; opacity: 0.6;');
+    draggableHandle.setAttribute('viewBox', '0 0 20 20');
+
+    const draggableHandlePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    draggableHandlePath.setAttribute('fill-rule', 'evenodd');
+    draggableHandlePath.setAttribute('d', 'M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z');
+    draggableHandlePath.setAttribute('clip-rule', 'evenodd');
+
+    draggableHandle.appendChild(draggableHandlePath);
+
+    div1.appendChild(draggableHandle);
     div1.appendChild(div2);
     div2.appendChild(div3);
     div3.appendChild(labelText);
@@ -419,13 +535,6 @@ WHAT THE ABOVE CODE CREATES
     </div>
 </div>
 */
-
-
-
-
-
-
-
 
 
 function createSVG(iconType, id) {

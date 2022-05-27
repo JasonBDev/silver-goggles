@@ -320,8 +320,6 @@
 
       }
 
-      console.log(tabs);
-
       var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
       xmlhttp.open("POST", '/admin');
       xmlhttp.onreadystatechange = function () { // Call a function when the state changes.
@@ -331,8 +329,6 @@
       }
       xmlhttp.setRequestHeader("Content-Type", "application/json");
       xmlhttp.send(JSON.stringify(tabs));
-
-      console.log(tabs);
 
     }
 
