@@ -209,7 +209,8 @@
 
               var section = [];
 
-              for (var item of accordion_body.firstChild.querySelectorAll('div')) {
+              for (var item of accordion_body.querySelector('div').querySelectorAll('div')) {
+
                 if (item.id.includes('-image-')) {
                   if (item.querySelector('input').files.length != 0) {
                     section.push({
@@ -346,6 +347,7 @@
       new Sortable.create(item, {
         animation: 200,
         ghostClass: 'blue-background-class',
+        handle: '.accordion-handle',
         onEnd: (evt) => {
           console.log(evt.newIndex);
         },
@@ -357,6 +359,7 @@
       new Sortable.create(item, {
         animation: 200,
         ghostClass: 'blue-background-class',
+        handle: '.accordion-handle',
         onEnd: (evt) => {
           console.log(evt.newIndex);
         },

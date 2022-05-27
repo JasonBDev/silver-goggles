@@ -128,6 +128,7 @@ function createSectionPartOne() {
     new Sortable.create(div1, {
         animation: 200,
         ghostClass: 'blue-background-class',
+        handle: '.accordion-handle',
     });
 
     const div3 = document.createElement('div');
@@ -162,17 +163,19 @@ function createSectionPartTwo(t, s) {
     div1.setAttribute('id', `accordion-body-tab${t}-section${s}`);
     div1.setAttribute('style', 'width: 100%;');
 
+    const sectionDivider = document.createElement('h6');
+    sectionDivider.classList.add('mb-3', 'text-muted', 'text-center');
+    sectionDivider.innerText = `Section ${s}`;
+    div1.appendChild(sectionDivider);
+
     const div2 = document.createElement('div');
     div2.setAttribute('id', `content-tab${t}-section${s}`);
 
     new Sortable.create(div2, {
         animation: 200,
         ghostClass: 'blue-background-class',
+        handle: '.accordion-handle',
     });
-
-    const sectionDivider = document.createElement('h6');
-    sectionDivider.classList.add('mb-3', 'text-muted', 'text-center');
-    sectionDivider.innerText = `Section ${s}`;
 
     const draggableHandle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     draggableHandle.classList.add('accordion-handle');
@@ -189,7 +192,6 @@ function createSectionPartTwo(t, s) {
     container.appendChild(draggableHandle);
 
     div1.appendChild(div2);
-    div2.appendChild(sectionDivider);
 
     container.appendChild(div1);
     document.querySelector(`#sections-tab${t}`).appendChild(container);
