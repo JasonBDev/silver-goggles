@@ -94,7 +94,7 @@ function createTitle() {
     // </button>
 
     const deleteButton = document.createElement('button');
-    deleteButton.setAttribute('onClick', "deleteByRawId('accordion-item" + tabNum +"')");
+    deleteButton.setAttribute('onClick', "deleteByRawId('accordion-item" + tabNum + "')");
     deleteButton.setAttribute('style', "display: flex; justify-items: center; align-items:center; width: 25px; height: 25px; padding: 0; margin: 0; background-color: white; border: none");
 
     const deleteSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -144,7 +144,7 @@ function createTitle() {
 
 function createSectionPartOne() {
     const div1 = document.createElement('div');
-    div1.setAttribute('id', `sections-tab${tabNum}`);
+    div1.setAttribute('id', `sections-tab`);
 
     new Sortable.create(div1, {
         animation: 200,
@@ -159,7 +159,7 @@ function createSectionPartOne() {
     const addSectionButton = document.createElement('a');
     addSectionButton.classList.add('btn', 'btn-outline-dark', 'btn-sm', 'text-muted', 'border', 'border-light');
     addSectionButton.setAttribute('id', `add-section-button-tab${tabNum}`);
-    addSectionButton.setAttribute('onclick', `createSectionPartTwo(${tabNum}, ${sectionNum})`);
+    addSectionButton.setAttribute('onclick', `addSectionToNewTab(event)`);
     addSectionButton.innerText = 'Add Section';
 
     div3.appendChild(addSectionButton);
@@ -184,10 +184,38 @@ function createSectionPartTwo(t, s) {
     div1.setAttribute('id', `accordion-body-tab${t}-section${s}`);
     div1.setAttribute('style', 'width: 100%;');
 
+    const sectionDividerDiv = document.createElement('div');
+    sectionDividerDiv.setAttribute('style', 'width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;');
+
     const sectionDivider = document.createElement('h6');
-    sectionDivider.classList.add('mb-3', 'text-muted', 'text-center');
+    sectionDivider.classList.add('text-muted', 'text-center');
+    sectionDivider.setAttribute('style', 'margin-bottom: -8px;')
     sectionDivider.innerText = `Section ${s}`;
-    div1.appendChild(sectionDivider);
+    
+    sectionDividerDiv.append(sectionDivider);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.setAttribute('onClick', "deleteNewSection(event)");
+    deleteButton.setAttribute('style', "display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; background-color: white; border: none; margin-top: 8px; margin-left: 8px;");
+
+    const deleteSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    deleteSVG.classList.add('h-6');
+    deleteSVG.classList.add('w-6');
+    deleteSVG.setAttribute('fill', 'none');
+    deleteSVG.setAttribute('stroke', 'currentColor');
+    deleteSVG.setAttribute('strokeWidth', '2');
+    deleteSVG.setAttribute('viewBox', '0 0 24 24');
+
+    const deletePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    deletePath.setAttribute('fill-rule', 'none');
+    deletePath.setAttribute('d', 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16');
+
+    deleteSVG.appendChild(deletePath);
+    deleteButton.appendChild(deleteSVG);
+
+    sectionDividerDiv.appendChild(deleteButton);
+
+    div1.appendChild(sectionDividerDiv);
 
     const div2 = document.createElement('div');
     div2.setAttribute('id', `content-tab${t}-section${s}`);
@@ -233,31 +261,31 @@ function createAddElementsButtons(t, s) {
     const addImageButton = document.createElement('a');
     addImageButton.classList.add('btn', 'btn-link', 'btn-sm');
     addImageButton.setAttribute('id', `add-image-button-tab${t}-section${s}`);
-    addImageButton.setAttribute('onclick', `createImage(${t}, ${s})`);
+    addImageButton.setAttribute('onclick', `createNewNewElement(event, "#tab1-section1-image-container1")`);
     addImageButton.innerText = '+Img';
 
     const addHeadButton = document.createElement('a');
     addHeadButton.classList.add('btn', 'btn-link', 'btn-sm');
     addHeadButton.setAttribute('id', `add-head-button-tab${t}-section${s}`);
-    addHeadButton.setAttribute('onclick', `createHead(${t}, ${s})`);
+    addHeadButton.setAttribute('onclick', `createNewNewElement(event, "#main-heading")`);
     addHeadButton.innerText = '+Head';
 
     const addSubheadButton = document.createElement('a');
     addSubheadButton.classList.add('btn', 'btn-link', 'btn-sm');
     addSubheadButton.setAttribute('id', `add-subhead-button-tab${t}-section${s}`);
-    addSubheadButton.setAttribute('onclick', `createSubhead(${t}, ${s})`);
+    addSubheadButton.setAttribute('onclick', `createNewNewElement(event, "#sub-heading")`);
     addSubheadButton.innerText = '+Subhead';
 
     const addInformationButton = document.createElement('a');
     addInformationButton.classList.add('btn', 'btn-link', 'btn-sm');
     addInformationButton.setAttribute('id', `add-information-button-tab${t}-section${s}`);
-    addInformationButton.setAttribute('onclick', `createInformation(${t}, ${s})`);
+    addInformationButton.setAttribute('onclick', `createNewNewElement(event, "#information")`);
     addInformationButton.innerText = '+Info';
 
     const addButtonButton = document.createElement('a');
     addButtonButton.classList.add('btn', 'btn-link', 'btn-sm');
     addButtonButton.setAttribute('id', `add-button-button-tab${t}-section${s}`);
-    addButtonButton.setAttribute('onclick', `createButton(${t}, ${s})`);
+    addButtonButton.setAttribute('onclick', `createNewNewElement(event, "#information")`);
     addButtonButton.innerText = '+Button';
 
 

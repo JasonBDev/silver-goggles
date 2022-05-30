@@ -1,5 +1,13 @@
 <% layout('layouts/userBoilerplate') %>
 
+  <script>
+    var objectt = [
+      {
+        title: 'hello', text: 'sup'
+      }
+    ]
+  </script>
+
   <div id="new-tab-form" action="/admin?_method=PUT" method="POST">
     <div class="row">
       <div class="col-auto me-auto">
@@ -12,103 +20,91 @@
 
     <div class="accordion" id="accordionExample">
 
-      <% for(let tab of accordion.tabs) { %>
+      <% var x=0 %>
 
-        <div id="tab-<%= tab._id %>" class="accordion-item">
+        <% for(let tab of accordion.tabs) { %>
 
-          <h2 class="accordion-header" id="heading<%= tab._id %>">
-            <div class="d-flex align-items-center p-2">
-              <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
-                fill="currentColor">
-                <path fill-rule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd" />
-              </svg>
-              <label class="visually-hidden" for="edit-title<%= tab._id %>"></label>
-              <input class="form-control form-control-lg me-3 border-0" id="edit-title<%= tab._id %>" type="text"
-                name="tabs[<%= tab %>][title]" value="<%= tab.title %>" placeholder="Title 1">
-              <button onclick="deleteById('<%- tab._id %>')"
-                style="display: flex; justify-items: center; align-items:center; width: 25px; height: 25px; padding: 0; margin: 0; background-color: white; border: none">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-              </button>
-              <button class="btn accordion-expand-icon collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapse<%= tab._id %>" aria-expanded="false" aria-controls="collapse<%= tab._id %>">
-                <svg width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z">
-                  </path>
-                </svg>
-              </button>
-            </div>
-          </h2>
+          <% x++; %>
 
-          <div id="collapse<%= tab._id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= tab._id %>"
-            data-bs-parent="#accordionExample">
+            <div id="tab-<%= tab._id %>" class="accordion-item">
 
-            <div id="sortable-section">
+              <h2 class="accordion-header" id="heading<%= tab._id %>">
+                <div class="d-flex align-items-center p-2">
+                  <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                    style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                      clip-rule="evenodd" />
+                  </svg>
+                  <label class="visually-hidden" for="edit-title<%= tab._id %>"></label>
+                  <input class="form-control form-control-lg me-3 border-0" id="edit-title<%= tab._id %>" type="text"
+                    name="tabs[<%= tab %>][title]" value="<%= tab.title %>" placeholder="Title 1">
+                  <button onclick="deleteById('<%- tab._id %>')"
+                    style="display: flex; justify-items: center; align-items:center; width: 25px; height: 25px; padding: 0; margin: 0; background-color: white; border: none">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                  <button class="btn accordion-expand-icon collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapse<%= tab._id %>" aria-expanded="false"
+                    aria-controls="collapse<%= tab._id %>">
+                    <svg width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z">
+                      </path>
+                    </svg>
+                  </button>
+                </div>
+              </h2>
 
-              <% var i=0; %>
+              <div id="collapse<%= tab._id %>" class="accordion-collapse collapse"
+                aria-labelledby="heading<%= tab._id %>" data-bs-parent="#accordionExample">
 
-                <% for (let section of tab.sections) { %>
+                <div id="sortable-section">
 
-                  <% i++; %>
+                  <% var i=0; %>
 
-                    <div style="display: flex; flex-direction: column;">
+                    <% for (let section of tab.sections) { %>
 
-                      <div style="display: flex; justify-content: center; align-items: center;">
-                        <h6 class="text-muted text-center" style="margin-bottom: -8px;">Section <%= i %>
-                        </h6>
-                        <button onclick="deleteSection(event)"
-                          style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                          </svg>
-                        </button>
-                      </div>
 
-                      <div id="accordion-body-sortable"
-                        style="display: flex; flex-direction: row; padding-left: 8px; padding-right: 48px; align-items: center;">
+                      <% i++; %>
 
-                        <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                          style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;'
-                          viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                            clip-rule="evenodd" />
-                        </svg>
+                        <div style="display: flex; flex-direction: column;">
 
-                        <div class="accordion-body" style="width: 100%; padding: 8px 8px 20px 8px;">
+                          <div style="display: flex; justify-content: center; align-items: center;">
+                            <h6 class="text-muted text-center" style="margin-bottom: -8px;">Section <%= i %>
+                            </h6>
+                            <button onclick="deleteSection(event)"
+                              style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
 
-                          <% for (let item of section) { %>
+                          <div id="accordion-body-sortable"
+                            style="display: flex; flex-direction: row; padding-left: 8px; padding-right: 48px; align-items: center;">
 
-                            <% if(item.type=='image' && item.name !='' && item.src !='' ) { %>
-                              <div id="image" style="display: flex; flex-direction: row; align-items: center;">
+                            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;'
+                              viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                clip-rule="evenodd" />
+                            </svg>
 
-                                <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                                  style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
-                                  viewBox="0 0 20 20" fill="currentColor">
-                                  <path fill-rule="evenodd"
-                                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                    clip-rule="evenodd" />
-                                </svg>
+                            <div class="accordion-body" style="width: 100%; padding: 8px 8px 20px 8px;">
 
-                                <a href="<%= item.url %> " target="_blank"><img class="img-fluid mb-3 displayed-img"
-                                    src="<%= item.src %> " alt="palceholder">
-                                </a>
+                              <% for (let item of section) { %>
 
-                              </div>
-                              <% } %>
+                                <% if(item.type=='image' && item.name !='' && item.src !='' ) { %>
+                                  <div id="image" style="display: flex; flex-direction: row; align-items: center;">
 
-                                <% if(item.type=='heading' ) { %>
-                                  <div id="main-heading"
-                                    style="display: flex; flex-direction: row; align-items: center;">
                                     <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
                                       style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
                                       viewBox="0 0 20 20" fill="currentColor">
@@ -116,23 +112,16 @@
                                         d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
                                         clip-rule="evenodd" />
                                     </svg>
-                                    <input value="<%= item.text %>" class="form-control my-2 border-0"
-                                      id="edit-tab1-section1-head1" type="text" name="tab[head111]"
-                                      style="padding-left: 8px; font-size: 20px; font-weight: 700;"
-                                      placeholder="Heading">
-                                    <button onclick="deleteElement(event)"
-                                      style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
-                                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                      </svg>
-                                    </button>
+
+                                    <a href="<%= item.url %> " target="_blank"><img class="img-fluid mb-3 displayed-img"
+                                        src="<%= item.src %> " alt="palceholder">
+                                    </a>
+
                                   </div>
                                   <% } %>
 
-                                    <% if(item.type=='subheading' ) { %>
-                                      <div id="sub-heading"
+                                    <% if(item.type=='heading' ) { %>
+                                      <div id="main-heading"
                                         style="display: flex; flex-direction: row; align-items: center;">
                                         <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
                                           style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
@@ -141,10 +130,10 @@
                                             d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
                                             clip-rule="evenodd" />
                                         </svg>
-                                        <input value="<%= item.text %>"
-                                          class="form-control form-control-sm my-2 border-0"
-                                          id="edit-tab1-section1-subhead1" type="text" name="tab[subhead111]"
-                                          style="font-size: 16px; font-weight: 700;" placeholder="Subheading">
+                                        <input value="<%= item.text %>" class="form-control my-2 border-0"
+                                          id="edit-tab1-section1-head1" type="text" name="tab[head111]"
+                                          style="padding-left: 8px; font-size: 20px; font-weight: 700;"
+                                          placeholder="Heading">
                                         <button onclick="deleteElement(event)"
                                           style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
                                           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -156,8 +145,8 @@
                                       </div>
                                       <% } %>
 
-                                        <% if(item.type=='information' ) { %>
-                                          <div id="information"
+                                        <% if(item.type=='subheading' ) { %>
+                                          <div id="sub-heading"
                                             style="display: flex; flex-direction: row; align-items: center;">
                                             <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
                                               style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
@@ -166,10 +155,10 @@
                                                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
                                                 clip-rule="evenodd" />
                                             </svg>
-                                            <textarea class="form-control form-control-sm my-2 border-0"
-                                              id="edit-tab1-section1-information1" type="text"
-                                              name="tab[information111]"
-                                              placeholder="This would be good place to add a description."><%= item.text %></textarea>
+                                            <input value="<%= item.text %>"
+                                              class="form-control form-control-sm my-2 border-0"
+                                              id="edit-tab1-section1-subhead1" type="text" name="tab[subhead111]"
+                                              style="font-size: 16px; font-weight: 700;" placeholder="Subheading">
                                             <button onclick="deleteElement(event)"
                                               style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
                                               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -181,37 +170,20 @@
                                           </div>
                                           <% } %>
 
-                                            <% if(item.type=='button' ) { %>
-
-                                              <div id="a-button"
-                                                style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+                                            <% if(item.type=='information' ) { %>
+                                              <div id="information"
+                                                style="display: flex; flex-direction: row; align-items: center;">
                                                 <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-                                                  style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 26px;'
+                                                  style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
                                                   viewBox="0 0 20 20" fill="currentColor">
                                                   <path fill-rule="evenodd"
                                                     d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
                                                     clip-rule="evenodd" />
                                                 </svg>
-                                                <div class="row" style="width: 100%; margin-left: 0px; ">
-                                                  <div class="row border border-dark rounded my-2"
-                                                    style="padding-left: 8px; padding-right: 0px;">
-                                                    <div class="d-flex my-2" style="padding-left: 0px;">
-                                                      <div class="flex-grow-0" style="margin-right: 4px;">
-                                                        <input class="form-control form-control-sm border-0"
-                                                          id="edit-tab1-section1-buttonText1" type="text"
-                                                          name="tab[buttonText111]" placeholder="Button Name"
-                                                          value="<%= item.text %>">
-                                                      </div>
-                                                      <div class="flex-grow-1">
-                                                        <input
-                                                          class="form-control form-control-sm border-0 border-start border border-1 border-white"
-                                                          id="edit-tab1-section1-buttonURL1" type="text"
-                                                          name="tab[buttonURL111]" placeholder="url"
-                                                          value="<%= item.url %>">
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
+                                                <textarea class="form-control form-control-sm my-2 border-0"
+                                                  id="edit-tab1-section1-information1" type="text"
+                                                  name="tab[information111]"
+                                                  placeholder="This would be good place to add a description."><%= item.text %></textarea>
                                                 <button onclick="deleteElement(event)"
                                                   style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
                                                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
@@ -224,34 +196,344 @@
                                               </div>
                                               <% } %>
 
-                                                <% } %>
+                                                <% if(item.type=='button' ) { %>
+
+                                                  <div id="a-button"
+                                                    style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+                                                    <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+                                                      style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 26px;'
+                                                      viewBox="0 0 20 20" fill="currentColor">
+                                                      <path fill-rule="evenodd"
+                                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                                        clip-rule="evenodd" />
+                                                    </svg>
+                                                    <div class="row" style="width: 100%; margin-left: 0px; ">
+                                                      <div class="row border border-dark rounded my-2"
+                                                        style="padding-left: 8px; padding-right: 0px;">
+                                                        <div class="d-flex my-2" style="padding-left: 0px;">
+                                                          <div class="flex-grow-0" style="margin-right: 4px;">
+                                                            <input class="form-control form-control-sm border-0"
+                                                              id="edit-tab1-section1-buttonText1" type="text"
+                                                              name="tab[buttonText111]" placeholder="Button Name"
+                                                              value="<%= item.text %>">
+                                                          </div>
+                                                          <div class="flex-grow-1">
+                                                            <input
+                                                              class="form-control form-control-sm border-0 border-start border border-1 border-white"
+                                                              id="edit-tab1-section1-buttonURL1" type="text"
+                                                              name="tab[buttonURL111]" placeholder="url"
+                                                              value="<%= item.url %>">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <button onclick="deleteElement(event)"
+                                                      style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                        strokeWidth={2}>
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                      </svg>
+                                                    </button>
+                                                  </div>
+                                                  <% } %>
+
+                                                    <% } %>
+
+                            </div>
+
+
+
+
+                          </div>
+
+                          <div style="margin-left: 40px;" id="#add-element-buttons-container-tab1-section1">
+                            <a class="btn btn-link btn-sm" id="add-image-button-tab1-section1"
+                              onclick="createNewImage(event)">+Img</a>
+                            <a class="btn btn-link btn-sm" id="add-head-button-tab1-section1"
+                              onclick="createNewHead(event)">+Head</a>
+                            <a class="btn btn-link btn-sm" id="add-subhead-button-tab1-section1"
+                              onclick="createNewSubhead(event)">+Subhead</a>
+                            <a class="btn btn-link btn-sm" id="add-information-button-tab1-section1"
+                              onclick="createNewInformation(event)">+Info</a>
+                            <a class="btn btn-link btn-sm" id="add-button-button-tab1-section1"
+                              onclick="createNewButton(event)">+Button</a>
+                          </div>
+
 
                         </div>
 
 
-                      </div>
 
+                        <% } %>
 
-                    </div>
-                    <% } %>
+                          <div class="row mx-3 my-2" id="add-section-button-container-tab">
+                            <a onClick="addSection('<%= tab._id %>', <%= tab.sections.length %>)"
+                              class="btn btn-outline-dark btn-sm text-muted border border-light"
+                              id="add-section-button-tab1" onclick="createSectionPartTwo(1, 2)">Add Section</a>
+                          </div>
+
+                </div>
+
+              </div>
 
             </div>
-
-          </div>
-
-        </div>
-        <% } %>
+            <% } %>
 
     </div>
   </div>
 
+  <div id="template" style="display: none;">
+    <div id="content-tab-section-template" style="display: flex; flex-direction: column;">
+
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <h6 class="text-muted text-center section-title" style="margin-bottom: -8px;">
+          Section
+        </h6>
+        <button onclick="deleteSection(event)"
+          style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
+      </div>
+
+      <div id="accordion-body-sortable"
+        style="display: flex; flex-direction: row; padding-left: 8px; padding-right: 48px; align-items: center;">
+
+        <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+          style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
+          fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clip-rule="evenodd" />
+        </svg>
+
+        <div class="accordion-body" style="width: 100%; padding: 8px 8px 20px 8px;">
+
+          <div class="d-flex mb-3 align-items-center" id="tab1-section1-image-container1">
+            <svg class="accordion-handle"
+              style="width: 20px; height: 20px; color: rgb(120,120,120); margin-right: 10px; opacity: 0.6;"
+              viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <div class="ratio ratio-16x9"><label class="label-img" for="edit-tab1-section1-image1"><span
+                  class="text-muted">Choose Image</span></label><input class="mb-3 border-0 input-img"
+                id="edit-tab1-section1-image1" type="file" name="tabs[0][sections][0][image]" placeholder="Choose Image"
+                accept=".jpg, .png, .jpeg"></div>
+            <div class="delete-element-icon text-muted ms-2" onclick="deleteImageElement(event)">
+              <svg width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                <path
+                  d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z">
+                </path>
+              </svg>
+            </div>
+          </div>
+          <div id="main-heading" style="display: flex; flex-direction: row; align-items: center;">
+            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+              viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd" />
+            </svg>
+            <input value="" class="form-control my-2 border-0" id="edit-tab1-section1-head1" type="text"
+              name="tab[head111]" style="padding-left: 8px; font-size: 20px; font-weight: 700;" placeholder="Heading">
+            <button onclick="deleteElement(event)"
+              style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+          <div id="sub-heading" style="display: flex; flex-direction: row; align-items: center;">
+            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+              viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd" />
+            </svg>
+            <input value="" class="form-control form-control-sm my-2 border-0" id="edit-tab1-section1-subhead1"
+              type="text" name="tab[subhead111]" style="font-size: 16px; font-weight: 700;" placeholder="Subheading">
+            <button onclick="deleteElement(event)"
+              style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+          <div id="information" style="display: flex; flex-direction: row; align-items: center;">
+            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 14px;'
+              viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd" />
+            </svg>
+            <textarea class="form-control form-control-sm my-2 border-0" id="edit-tab1-section1-information1"
+              type="text" name="tab[information111]"
+              placeholder="This would be good place to add a description."></textarea>
+            <button onclick="deleteElement(event)"
+              style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+
+
+          <div id="a-button" style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+            <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
+              style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; margin-right: 26px;'
+              viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd" />
+            </svg>
+            <div class="row" style="width: 100%; margin-left: 0px; ">
+              <div class="row border border-dark rounded my-2" style="padding-left: 8px; padding-right: 0px;">
+                <div class="d-flex my-2" style="padding-left: 0px;">
+                  <div class="flex-grow-0" style="margin-right: 4px;">
+                    <input class="form-control form-control-sm border-0" id="edit-tab1-section1-buttonText1" type="text"
+                      name="tab[buttonText111]" placeholder="Button Name" value="">
+                  </div>
+                  <div class="flex-grow-1">
+                    <input class="form-control form-control-sm border-0 border-start border border-1 border-white"
+                      id="edit-tab1-section1-buttonURL1" type="text" name="tab[buttonURL111]" placeholder="url"
+                      value="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button onclick="deleteElement(event)"
+              style="display: flex; justify-items: center; align-items:center; width: 20px; height: 20px; padding: 0; margin: 0; margin-top: 8px; margin-left: 8px; background-color: white; border: none">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+      <div style="margin-left: 40px;" id="#add-element-buttons-container-tab1-section1">
+        <a class="btn btn-link btn-sm" id="add-image-button-tab1-section1" onclick="createNewImage(event)">+Img</a>
+        <a class="btn btn-link btn-sm" id="add-head-button-tab1-section1" onclick="createNewHead(event)">+Head</a>
+        <a class="btn btn-link btn-sm" id="add-subhead-button-tab1-section1"
+          onclick="createNewSubhead(event)">+Subhead</a>
+        <a class="btn btn-link btn-sm" id="add-information-button-tab1-section1"
+          onclick="createNewInformation(event)">+Info</a>
+        <a class="btn btn-link btn-sm" id="add-button-button-tab1-section1" onclick="createNewButton(event)">+Button</a>
+      </div>
+
+    </div>
+  </div>
+
+
   <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
   <script>
 
-    function removeAllChildNodes(parent) {
-      while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-      }
+
+    function getElementContainer(e) {
+      console.log('getElements')
+      console.log(e.target.parentElement.parentElement);
+      return e.target.parentElement.parentElement.querySelector('.accordion-body');
+    }
+
+    function createById(e, id) {
+      const templateContainer = document.getElementById('template');
+      getElementContainer(e).appendChild(templateContainer.querySelector(id).cloneNode(true));
+    }
+
+    function createNewImage(e) {
+      createById(e, '#tab1-section1-image-container1');
+    }
+
+    function createNewHead(e) {
+      createById(e, '#main-heading');
+    }
+
+    function createNewSubhead(e) {
+      createById(e, '#sub-heading');
+
+    }
+
+    function createNewInformation(e) {
+      createById(e, '#information');
+
+    }
+
+    function createNewButton(e) {
+      createById(e, '#a-button');
+    }
+
+
+    //New tab
+    function createNewNewElement(e, id) {
+      const templateContainer = document.getElementById('template');
+      e.target.parentElement.parentElement.parentElement.querySelector('#content-tab1-section1').appendChild(templateContainer.querySelector(id).cloneNode(true))
+    }
+
+    function addSection(id) {
+      var node = document.getElementById('content-tab-section-template').cloneNode(true);
+      var parent = document.getElementById('collapse' + id).children[0];
+      node.id = ''
+      node.querySelector('.section-title').innerHTML = 'Section ' + (parent.children.length);
+      parent.insertBefore(node, parent.children[parent.children.length - 1]);
+
+      console.log(parent.children[parent.children.length - 2]);
+      var section = parent.children[parent.children.length - 2].querySelector('.accordion-body');
+      new Sortable.create(section, {
+        animation: 200,
+        ghostClass: 'blue-background-class',
+        handle: '.accordion-handle',
+        onEnd: (evt) => {
+          console.log(evt.newIndex);
+        },
+      });
+    }
+
+    function addSectionToNewTab(e) {
+      var node = document.getElementById('content-tab-section-template').cloneNode(true);
+
+      var parent = e.target.parentElement.parentElement.children[0];
+
+      console.log(parent.children.length);
+
+      node.id = ''
+      node.querySelector('.section-title').innerHTML = 'Section ' + (parent.children.length + 1);
+      parent.insertBefore(node, parent.children[parent.children.length]);
+
+      var section = parent.children[parent.children.length - 1].querySelector('.accordion-body');
+      new Sortable.create(section, {
+        animation: 200,
+        ghostClass: 'blue-background-class',
+        handle: '.accordion-handle',
+        onEnd: (evt) => {
+          console.log(evt.newIndex);
+        },
+      });
+    }
+
+    function deleteImageElement(e) {
+      console.log(e.target.closest('#tab1-section1-image-container1').remove());
     }
 
     function deleteById(id) {
@@ -264,6 +546,10 @@
 
     function deleteSection(e) {
       console.log(e.target.closest('div').parentElement.remove());
+    }
+
+    function deleteNewSection(e) {
+      console.log(e.target.closest('div').parentElement.parentElement.remove());
     }
 
     function deleteElement(e) {
@@ -280,81 +566,10 @@
 
       for (var item of accordion_items) {
 
-        if (!item.id.includes('tab')) {
-
-          //New item
-          var tab = {
-            title: '',
-            sections: []
-          }
-
-          //Gets header text
-          const header = item.querySelector('.accordion-header');
-          const header_text = header.querySelector('input[type=text]');
-          tab.title = header_text.value;
-
-          //Get body
-          var accordion_bodies = item.querySelectorAll('.accordion-body');
-
-          if (accordion_bodies != null) {
-
-            for (var accordion_body of accordion_bodies) {
-
-              var section = [];
-
-              for (var item of accordion_body.querySelector('div').querySelectorAll('div')) {
-
-                if (item.id.includes('-image-')) {
-                  if (item.querySelector('input').files.length != 0) {
-                    section.push({
-                      type: 'image',
-                      filename: item.querySelector('input').files[0].name,
-                      source: item.querySelector('input').value,
-                      url: 'http://localhost:3000/' + item.querySelector('input').files[0].name,
-                    })
-                  }
-                } else if (item.id.includes('-head-')) {
-                  if (item.querySelector('input').value == '') continue;
-                  section.push({
-                    type: 'heading',
-                    text: item.querySelector('input').value
-                  })
-                } else if (item.id.includes('-subhead-')) {
-                  if (item.querySelector('input').value == '') continue;
-                  section.push({
-                    type: 'subheading',
-                    text: item.querySelector('input').value
-                  })
-                } else if (item.id.includes('-information-')) {
-                  if (item.querySelector('textarea').value == '') continue;
-                  section.push({
-                    type: 'information',
-                    text: item.querySelector('textarea').value
-                  })
-                } else if (item.id.includes('-button-')) {
-                  if (item.querySelectorAll('input')[0].value == '' && item.querySelectorAll('input')[1].value == '') continue;
-                  section.push({
-                    type: 'button',
-                    text: item.querySelectorAll('input')[0].value,
-                    url: item.querySelectorAll('input')[1].value
-                  })
-                }
-              }
-
-              if (section.length == 0) continue;
-
-              tab.sections.push(section);
-
-            }
-
-          }
-
-          if (tab.sections.length == 0 && tab.title == '') continue;
-
-          tabs.push(tab);
-
-        } else {
+        if (true) {
           //Old item
+
+          console.log('old');
 
           var tab = {
             title: '',
@@ -415,6 +630,8 @@
               tab.sections.push(section);
             }
           }
+
+          if (tab.title == '' && tab.sections.length == 0) continue;
 
           tabs.push(tab);
 
