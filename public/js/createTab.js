@@ -72,14 +72,6 @@ function createTitle() {
     inputTitle.setAttribute('name', `tabs[${tabNum - 1}][title]`);
     inputTitle.setAttribute('placeholder', `Title ${tabNum}`);
 
-    // <svg class="accordion-handle" xmlns="http://www.w3.org/2000/svg"
-    //     style='width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px;' viewBox="0 0 20 20"
-    //     fill="currentColor">
-    //     <path fill-rule="evenodd"
-    //         d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-    //         clip-rule="evenodd" />
-    // </svg>
-
     const draggableHandle = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     draggableHandle.classList.add('accordion-handle');
     draggableHandle.setAttribute('style', 'width: 20px; height: 20px; color: rgb(120,120,120); margin-left: 5px; opacity: 0.6;');
@@ -91,6 +83,34 @@ function createTitle() {
     draggableHandlePath.setAttribute('clip-rule', 'evenodd');
 
     draggableHandle.appendChild(draggableHandlePath);
+
+    // <button onclick="deleteById('<%- tab._id %>')"
+    //     style="display: flex; justify-items: center; align-items:center; width: 25px; height: 25px; padding: 0; margin: 0; background-color: white; border: none">
+    //     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+    //         stroke="currentColor" strokeWidth={2}>
+    //         <path strokeLinecap="round" strokeLinejoin="round"
+    //             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+    //     </svg>
+    // </button>
+
+    const deleteButton = document.createElement('button');
+    deleteButton.setAttribute('onClick', "deleteByRawId('accordion-item" + tabNum +"')");
+    deleteButton.setAttribute('style', "display: flex; justify-items: center; align-items:center; width: 25px; height: 25px; padding: 0; margin: 0; background-color: white; border: none");
+
+    const deleteSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    deleteSVG.classList.add('h-6');
+    deleteSVG.classList.add('w-6');
+    deleteSVG.setAttribute('fill', 'none');
+    deleteSVG.setAttribute('stroke', 'currentColor');
+    deleteSVG.setAttribute('strokeWidth', '2');
+    deleteSVG.setAttribute('viewBox', '0 0 24 24');
+
+    const deletePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    deletePath.setAttribute('fill-rule', 'none');
+    deletePath.setAttribute('d', 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16');
+
+    deleteSVG.appendChild(deletePath);
+    deleteButton.appendChild(deleteSVG);
 
     const button = document.createElement('button');
     button.classList.add('btn', 'accordion-expand-icon');
@@ -115,6 +135,7 @@ function createTitle() {
     div1.appendChild(labelTitle);
     div1.appendChild(draggableHandle);
     div1.appendChild(inputTitle);
+    div1.appendChild(deleteButton);
     div1.appendChild(button);
     button.appendChild(svg);
     svg.appendChild(path);
